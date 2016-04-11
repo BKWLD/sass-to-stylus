@@ -103,7 +103,7 @@ transform = (source) ->
 
 	# Fix calc() with variables
 	regex1 = /calc\(.*\)/gi # https://regex101.com/r/dL8hK6/2
-	regex2 = /#{(\$[\w\-]+)}/gi # https://regex101.com/r/iE6gW1/1
+	regex2 = /#{(\$[^}]+)}/gi # https://regex101.com/r/iE6gW1/1
 	while (result1 = regex1.exec(source)) != null
 
 		# Get the whole calc expression
