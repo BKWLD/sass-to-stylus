@@ -69,12 +69,8 @@ transform = (source) ->
 	source = source.replace regex, '$1: $2;'
 
 	# Change sass rem calls to use stylus func
-	# https://regex101.com/r/sP7eZ5/1
-	source = source.replace /@include rem\((.+),\s*(.+)\)/g, '$1: rem($2)'
-
-	# Change sass rem calls to use stylus func
-	# https://regex101.com/r/sP7eZ5/1
-	source = source.replace /@include rem\((.+),\s*(.+)\)/g, '$1: rem($2)'
+	# https://regex101.com/r/sP7eZ5/2
+	source = source.replace /@include rem\(['"]?([\w\-]+)['"]?,\s*(.+)\)/g, '$1: rem($2)'
 
 	# Change sass default argument colons to equals
 	# https://regex101.com/r/zM8yF4/1
