@@ -4,10 +4,15 @@ autoprefixer
 ###
 
 # Deps
-dive = require 'dive' # https://github.com/pvorb/node-dive
-jsdiff = require 'diff' # https://github.com/kpdecker/jsdiff
+dive = require 'dive'
+jsdiff = require 'diff'
+mkdirp = require 'mkdirp'
 require 'colors'
 fs = require 'fs'
+getDirName = require('path').dirname
+
+# Shorthand for logging to output
+output = process.stderr.write
 
 # Get list of css3 properties to look for. These were adapted from list on
 # http://www.quackit.com/css/css3/properties/
@@ -27,10 +32,23 @@ dive "#{process.cwd()}/app/sass", (err, file) ->
 	modified = transform original
 
 	# Show diff
-	process.stderr.write "\n\n"+file.replace(process.cwd(), '').bold.yellow+"\n\n"
+	process.stderr.write "\n"+file.replace(process.cwd(), '').bold.yellow+"\n"
 	jsdiff.diffLines(original, modified).forEach (part) ->
 		color = if part.added then 'green' else if part.removed then 'red' else 'grey'
 		process.stderr.write part.value[color]
+
+	# Save the modified version out
+	# https://regex101.com/r/pO0mX3/1
+	if '--save' in process.argv
+
+		# Log about the file
+		stylFile = file.replace /(.*\/app\/)sass\/_?(.*\.)scss/i, '$1styles/$2styl'
+		relStylFile = stylFile.replace(process.cwd(), '')
+		process.stderr.write "\n💾  #{relStylFile}".bgYellow.black.bold+"\n"
+
+		# Write the file
+		mkdirp.sync getDirName stylFile
+		fs.writeFileSync stylFile, modified
 
 # Transfrom sass to stylus
 transform = (source) ->
