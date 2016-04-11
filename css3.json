@@ -73,6 +73,7 @@
 	"text-decoration-color",
 	"text-decoration-skip",
 	"text-underline-position",
+	"text-shadow",
 
 	"background-blend-mode",
 	"background-clip",
