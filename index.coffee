@@ -85,7 +85,7 @@ transform = (source) ->
 
 	# Support how blocks get passed to yielding stylus funcs
 	# https://regex101.com/r/zZ0bZ1/1
-	source = source.replace /@include (.*\(.*\)\s*){/g, '+$1('
+	source = source.replace /@include (.*\(.*\)\s*){/g, '+$1{'
 
 	# Change normal mixin calls
 	# https://regex101.com/r/lO6yB0/2
