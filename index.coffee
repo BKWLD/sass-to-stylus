@@ -101,3 +101,28 @@ transform = (source) ->
 	# https://regex101.com/r/gX4hL9/1
 	source = source.replace /(\$[\w\-]+\s*):/g, '$1 ='
 
+	# Fix calc() with variables
+	regex1 = /calc\(.*\)/gi # https://regex101.com/r/dL8hK6/2
+	regex2 = /#{(\$[\w\-]+)}/gi # https://regex101.com/r/iE6gW1/1
+	while (result1 = regex1.exec(source)) != null
+
+		# Get the whole calc expression
+		calc = result1[0]
+
+		# Make an array of the variables being used
+		vars = []
+		vars.push("(#{result2[1]})") while (result2 = regex2.exec(calc)) != null
+		continue unless vars.length
+
+		# Substitute the variables for sprintf placeholders
+		calc = calc.replace regex2, '%s'
+
+		# Add the variables to the end of sprintf
+		calc = "'#{calc}' % (#{vars.join(' ')})"
+
+		# Replace the old calc with the new calc
+		source = source.slice(0, result1.index) + calc + source.slice(regex1.lastIndex)
+		regex1.lastIndex = result1.index + 1
+
+	# Return the modified source
+	return source
