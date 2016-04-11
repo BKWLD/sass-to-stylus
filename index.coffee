@@ -38,11 +38,11 @@ dive "#{process.cwd()}/app/sass", (err, file) ->
 		process.stderr.write part.value[color]
 
 	# Save the modified version out
-	# https://regex101.com/r/pO0mX3/1
 	if '--save' in process.argv
 
 		# Log about the file
-		stylFile = file.replace /(.*\/app\/)sass\/_?(.*\.)scss/i, '$1styles/$2styl'
+		# https://regex101.com/r/pO0mX3/1
+		stylFile = file.replace /(.*\/app\/)sass(.*\/)_?(.*\.)scss/i, '$1styles$2$3styl'
 		relStylFile = stylFile.replace(process.cwd(), '')
 		process.stderr.write "\n💾  #{relStylFile}".bgYellow.black.bold+"\n"
 
