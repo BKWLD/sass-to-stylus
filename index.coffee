@@ -124,5 +124,9 @@ transform = (source) ->
 		source = source.slice(0, result1.index) + calc + source.slice(regex1.lastIndex)
 		regex1.lastIndex = result1.index + 1
 
+	# Fix for loops
+	# https://regex101.com/r/pV7oE0/2
+	source = source.replace /@for (\$.+) from (\d) through (\d)/g, 'for $1 in $2..$3'
+
 	# Return the modified source
 	return source
