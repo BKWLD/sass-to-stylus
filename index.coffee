@@ -94,4 +94,5 @@ transform = (source) ->
 
 	# Update conditionals
 	# https://regex101.com/r/rY6vX6/1
-	source = source.replace /@(if|else)/g, '$1'
+	source = source.replace /@(if|else)/gi, '$1'
+	source = source.replace /elseif/gi, 'else if'
