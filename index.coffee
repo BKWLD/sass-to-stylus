@@ -96,3 +96,8 @@ transform = (source) ->
 	# https://regex101.com/r/rY6vX6/1
 	source = source.replace /@(if|else)/gi, '$1'
 	source = source.replace /elseif/gi, 'else if'
+
+	# Fix varaible definitions
+	# https://regex101.com/r/gX4hL9/1
+	source = source.replace /(\$[\w\-]+\s*):/g, '$1 ='
+
