@@ -89,7 +89,8 @@ transform = (source) ->
 
 	# Change normal mixin calls
 	# https://regex101.com/r/lO6yB0/2
-	source = source.replace /@include (.*)\(/g, '$1('
+	source = source.replace /@include (.*)\(/gi, '$1('
+	source = source.replace /@include ([\w\-]+)/gi, '$1()'
 
 	# Update conditionals
 	# https://regex101.com/r/rY6vX6/1
