@@ -79,6 +79,7 @@
 	"background-clip",
 	"background-origin",
 	"background-size",
+	"background-image",
 
 	"overflow",
 	"overflow-wrap",
@@ -103,5 +104,6 @@
 	"hanging-punctuation",
 	"outline-offset",
 	"tab-size",
-	"text-align-last"
+	"text-align-last",
+	"user-select"
 ]

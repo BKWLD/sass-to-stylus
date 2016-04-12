@@ -1,0 +1,22 @@
+[
+	"matrix",
+	"translate",
+	"translateX",
+	"translateY",
+	"scale",
+	"scaleX",
+	"scaleY",
+	"rotate",
+	"skew",
+	"skewX",
+	"skewY",
+	"matrix3d",
+	"translate3d",
+	"translateZ",
+	"scale3d",
+	"scaleZ",
+	"rotate3d",
+	"rotateX",
+	"rotateY",
+	"rotateZ"
+]

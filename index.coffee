@@ -17,6 +17,7 @@ output = process.stderr.write
 # Get list of css3 properties to look for. These were adapted from list on
 # http://www.quackit.com/css/css3/properties/
 css3 = require './css3.json'
+transforms = require './transforms.json'
 
 # Start walking
 dive "#{process.cwd()}/app/sass", (err, file) ->
@@ -61,6 +62,11 @@ transform = (source) ->
 	libs = [ 'rgbapng', 'ceaser-easing' ].join('|')
 	regex = new RegExp "@import (\"|')(#{libs})\\1;\n?", 'g'
 	source = source.replace(regex, '')
+
+	# Unpack transform shorthands
+	# https://regex101.com/r/mP2xG2/2
+	regex = new RegExp "@include (#{transforms.join('|')})\\(", 'g'
+	source = source.replace regex, 'transform: $1'
 
 	# Replace CSS3 vendor prefixing mixins with simple CSS3 properties in
 	# expectation  of autoprexier handling vendor prefixing.
